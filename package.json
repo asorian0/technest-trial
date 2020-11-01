@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "shared:install": "cd shared && npm ci",
     "backend:install": "cd backend && npm ci",
     "frontend:install": "cd frontend && npm ci",
+    "preinstall": "npm run shared:install && npm run build --prefix shared",
     "postinstall": "npm run backend:install && npm run frontend:install",
     "format": "prettier --write \"backend/src/**/*.ts\" \"backend/test/**/*.ts\" \"frontend/src/**/*.ts\" \"frontend/e2e/**/*.ts\"",
     "backend:lint": "npm run lint --prefix backend",

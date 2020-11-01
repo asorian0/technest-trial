@@ -5,7 +5,7 @@ import { map } from 'rxjs/operators';
 import { Response } from '../shared/response.model';
 
 import { BitcoinService } from './shared/bitcoin.service';
-import { Currency } from './shared/currency.enum';
+import { Currency } from '../../../shared/enum/currency.enum';
 
 @Controller('bitcoin')
 export class BitcoinController {

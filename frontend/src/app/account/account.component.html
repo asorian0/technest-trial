@@ -17,7 +17,7 @@
         <th mat-header-cell *matHeaderCellDef>Balance</th>
         <td mat-cell *matCellDef="let item">
           <div class="d-flex flex-column">
-            <span class="mb-1">{{ item.balance | currencyBitcoin:currentBitcoin }}</span>
+            <span class="mb-1">{{ item.balance | currencyBitcoin:currentBitcoinRate }}</span>
             <span>{{ item.balance | currency }}</span>
           </div>
         </td>
@@ -26,7 +26,7 @@
         <th mat-header-cell *matHeaderCellDef>Available balance</th>
         <td mat-cell *matCellDef="let item">
           <div class="d-flex flex-column">
-            <span class="mb-1">{{ item.availableBalance | currencyBitcoin:currentBitcoin }}</span>
+            <span class="mb-1">{{ item.availableBalance | currencyBitcoin:currentBitcoinRate }}</span>
             <span>{{ item.availableBalance | currency }}</span>
           </div>
         </td>
