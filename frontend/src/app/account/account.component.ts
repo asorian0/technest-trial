@@ -8,9 +8,9 @@ import {
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Account } from 'shared/account.model';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { Account } from 'technest-trial-shared/model/account.model';
 
 import { BitcoinService } from '../bitcoin/shared/bitcoin.service';
 

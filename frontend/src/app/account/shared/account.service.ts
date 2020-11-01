@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Account } from 'shared/account.model';
 import { Observable } from 'rxjs';
+import { Account } from 'technest-trial-shared/model/account.model';
 
 import { environment } from '../../../environments/environment';
 

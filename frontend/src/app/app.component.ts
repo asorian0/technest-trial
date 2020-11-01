@@ -5,6 +5,7 @@ import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Observable, Subject } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
+import { SocketService } from './shared/socket.service';
 
 @Component({
   selector: 'app-root',
@@ -33,8 +34,10 @@ export class AppComponent implements OnDestroy {
     private readonly breakpointObserver: BreakpointObserver,
     private readonly iconRegistry: MatIconRegistry,
     private readonly sanitizer: DomSanitizer,
+    private readonly socketService: SocketService,
     @Inject(DOCUMENT) private readonly document: Document,
   ) {
+    this.socketService.start();
     this.document.title = this.title;
     this.iconRegistry.addSvgIcon(
       'btc',

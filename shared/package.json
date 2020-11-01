@@ -3,5 +3,11 @@
   "version": "1.0.0",
   "description": "Shared package for TechNest trial",
   "author": "Armando Soriano <asoriano.dev@gmail.com>",
-  "license": "ISC"
+  "license": "ISC",
+  "scripts": {
+    "postinstall": "tsc"
+  },
+  "devDependencies": {
+    "typescript": "^4.0.5"
+  }
 }
