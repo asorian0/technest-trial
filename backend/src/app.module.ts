@@ -3,9 +3,8 @@ import { MongooseModule } from '@nestjs/mongoose';
 
 import * as config from '../config.json';
 
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { AccountModule } from './account/account.module';
+import { AppGateway } from './app.gateway';
 import { BitcoinModule } from './bitcoin/bitcoin.module';
 
 @Module({
@@ -14,7 +13,6 @@ import { BitcoinModule } from './bitcoin/bitcoin.module';
     AccountModule,
     BitcoinModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  providers: [AppGateway],
 })
 export class AppModule {}

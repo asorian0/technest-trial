@@ -32,7 +32,7 @@
         </td>
       </ng-container>
       <tr mat-header-row *matHeaderRowDef="columnsToDisplay, sticky: true"></tr>
-      <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
+      <tr mat-row *matRowDef="let row; columns: columnsToDisplay;" [class]="row.status"></tr>
     </table>
   </div>
   <mat-paginator [pageSizeOptions]="pageSizeOptions" showFirstLastButtons class="border-top"></mat-paginator>

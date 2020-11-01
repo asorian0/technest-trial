@@ -22,6 +22,8 @@
     "@angular/platform-browser": "~10.2.0",
     "@angular/platform-browser-dynamic": "~10.2.0",
     "@angular/router": "~10.2.0",
+    "@datorama/akita": "^4.22.0",
+    "@datorama/akita-ng-entity-service": "^1.0.0",
     "bootstrap": "^4.5.3",
     "rxjs": "~6.6.0",
     "technest-trial-shared": "file:../shared",

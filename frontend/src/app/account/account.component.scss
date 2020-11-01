@@ -6,5 +6,67 @@
     td.mat-cell {
       padding: 1rem 0;
     }
+
+    tbody tr {
+      animation-duration: 1s;
+
+      &.lower {
+        animation-name: lowerBalance;
+      }
+
+      &.higher {
+        animation-name: higherBalance;
+      }
+
+      &.lower,
+      &.higher {
+        td.mat-cell {
+          animation-duration: 1s;
+          animation-name: textColor;
+        }
+      }
+    }
+  }
+}
+
+@keyframes textColor {
+  from {
+    color: rgba(0,0,0,.87);
+  }
+  50% {
+    color: white;
+  }
+  to {
+    color: rgba(0,0,0,.87);
+  }
+}
+
+@keyframes lowerBalance {
+  from {
+    color: rgba(0,0,0,.87);
+    background-color: transparent;
+  }
+  50% {
+    color: rgba(255,255,255,.87);
+    background-color: red;
+  }
+  to {
+    color: rgba(0,0,0,.87);
+    background-color: transparent;
+  }
+}
+
+@keyframes higherBalance {
+  from {
+    color: rgba(0,0,0,.87);
+    background-color: transparent;
+  }
+  50% {
+    color: rgba(255,255,255,.87);
+    background-color: green;
+  }
+  to {
+    color: rgba(0,0,0,.87);
+    background-color: transparent;
   }
 }
