@@ -15,13 +15,15 @@ export class BitcoinService {
 
   public socket: WebSocket;
 
-  constructor(private readonly http: HttpClient,
-              private readonly snackbar: MatSnackBar) {
+  constructor(
+    private readonly http: HttpClient,
+    private readonly snackbar: MatSnackBar,
+  ) {
     this.currentValue().subscribe((response) => {
       this.currentValue$.next(response.data);
     });
     this.socket = new WebSocket('ws://localhost:3000');
-    this.socket.onmessage = message => {
+    this.socket.onmessage = (message) => {
       const response = JSON.parse(message.data);
       this.currentValue$.next(response.data);
     };

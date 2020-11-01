@@ -52,7 +52,9 @@ export class AccountComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
     this.bitcoin.currentValue$
       .pipe(takeUntil(this.destroy$))
-      .subscribe((currentBitcoin) => (this.currentBitcoinRate = currentBitcoin));
+      .subscribe(
+        (currentBitcoin) => (this.currentBitcoinRate = currentBitcoin),
+      );
     this.service
       .list()
       .pipe(takeUntil(this.destroy$))

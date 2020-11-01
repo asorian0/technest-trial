@@ -12,19 +12,22 @@ export class BitcoinGateway implements OnGatewayInit, OnModuleDestroy {
   private readonly messageBitcoin = 'bitcoin';
   private readonly interval = 30000;
 
-  constructor(private readonly service: BitcoinService) {
-  }
+  constructor(private readonly service: BitcoinService) {}
 
   public afterInit(server: WebSocket.Server): void {
-    interval(this.interval).pipe(takeUntil(this.destroy$)).subscribe(() => {
-      this.service.getCurrentBitcoinValue().subscribe(value => {
-        server.clients.forEach(client => {
-          if (client.readyState === WebSocket.OPEN) {
-            client.send(JSON.stringify({ event: this.messageBitcoin, data: value }));
-          }
+    interval(this.interval)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => {
+        this.service.getCurrentBitcoinValue().subscribe((value) => {
+          server.clients.forEach((client) => {
+            if (client.readyState === WebSocket.OPEN) {
+              client.send(
+                JSON.stringify({ event: this.messageBitcoin, data: value }),
+              );
+            }
+          });
         });
       });
-    });
   }
 
   public onModuleDestroy(): void {
