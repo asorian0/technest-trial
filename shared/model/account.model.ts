@@ -3,6 +3,6 @@ export interface Account {
   accountName: string;
   category: string;
   tag: string;
-  balance: string;
-  availableBalance: string;
+  balance: number;
+  availableBalance: number;
 }

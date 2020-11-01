@@ -1,0 +1,7 @@
+{
+  "name": "technest-trial-shared",
+  "version": "1.0.0",
+  "description": "Shared package for TechNest trial",
+  "author": "Armando Soriano <asoriano.dev@gmail.com>",
+  "license": "ISC"
+}

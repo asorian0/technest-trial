@@ -8,6 +8,7 @@ import {
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Account } from 'shared/account.model';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -32,7 +33,7 @@ export class AccountComponent implements OnInit, OnDestroy {
   @ViewChild(MatPaginator)
   public paginator: MatPaginator;
 
-  public data: MatTableDataSource<any>;
+  public data: MatTableDataSource<Account> = new MatTableDataSource([]);
   public columnsToDisplay: string[] = [
     'accountName',
     'category',
@@ -41,7 +42,7 @@ export class AccountComponent implements OnInit, OnDestroy {
     'availableBalance',
   ];
   public pageSizeOptions: number[] = [25, 50, 100];
-  public currentBitcoin = 0;
+  public currentBitcoinRate = 0;
 
   constructor(
     private readonly service: AccountService,
@@ -51,7 +52,9 @@ export class AccountComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
     this.bitcoin.currentValue$
       .pipe(takeUntil(this.destroy$))
-      .subscribe((currentBitcoin) => (this.currentBitcoin = currentBitcoin));
+      .subscribe(
+        (currentBitcoin) => (this.currentBitcoinRate = currentBitcoin),
+      );
     this.service
       .list()
       .pipe(takeUntil(this.destroy$))

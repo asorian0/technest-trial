@@ -1,20 +1,16 @@
 import { Injectable } from '@nestjs/common';
-import { from, Observable } from 'rxjs';
-import fetch from 'node-fetch';
-
-import * as config from '../../../config.json';
-
-import { Currency } from './currency.enum';
+import { finance } from 'faker';
+import { Observable, of } from 'rxjs';
+import { Currency } from 'technest-trial-shared/enum/currency.enum';
 
 @Injectable()
 export class BitcoinService {
+  private readonly min = 5000;
+  private readonly max = 12000;
+
   public getCurrentBitcoinValue(
-    currency: Currency = Currency.USD,
+    _currency: Currency = Currency.USD,
   ): Observable<number> {
-    return from(
-      fetch(`${config.bitcoin.API}/ticker`)
-        .then((r) => r.json())
-        .then((r) => r[currency].last),
-    );
+    return of(Number(finance.amount(this.min, this.max)));
   }
 }
