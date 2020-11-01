@@ -1,0 +1,62 @@
+$lowerColor: red;
+$higherColor: green;
+
+@keyframes textColorBackground {
+  from {
+    color: rgba(0,0,0,.87);
+  }
+  50% {
+    color: white;
+  }
+  to {
+    color: rgba(0,0,0,.87);
+  }
+}
+
+@keyframes lowerBalanceBackground {
+  from {
+    background-color: transparent;
+  }
+  50% {
+    background-color: $lowerColor;
+  }
+  to {
+    background-color: transparent;
+  }
+}
+
+@keyframes lowerBalanceText {
+  from {
+    color: inherit;
+  }
+  50% {
+    color: $lowerColor;
+  }
+  to {
+    color: inherit;
+  }
+}
+
+@keyframes higherBalanceBackground {
+  from {
+    background-color: transparent;
+  }
+  50% {
+    background-color: $higherColor;
+  }
+  to {
+    background-color: transparent;
+  }
+}
+
+@keyframes higherBalanceText {
+  from {
+    color: inherit;
+  }
+  50% {
+    color: $higherColor;
+  }
+  to {
+    color: inherit;
+  }
+}

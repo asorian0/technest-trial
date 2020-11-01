@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { takeUntil, tap } from 'rxjs/operators';
 import { AccountStatus } from 'technest-trial-shared/enum/account-status.enum';
 import { Account } from 'technest-trial-shared/model/account.model';
 
@@ -18,7 +18,9 @@ export class AccountService {
   constructor(
     private readonly http: HttpClient,
     private readonly store: AccountStore,
-  ) {}
+  ) {
+    this.list().subscribe();
+  }
 
   public list(): Observable<Account[]> {
     return this.http

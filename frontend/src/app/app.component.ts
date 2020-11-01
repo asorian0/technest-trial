@@ -1,10 +1,12 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { DOCUMENT } from '@angular/common';
-import { Component, Inject, OnDestroy, SecurityContext } from '@angular/core';
+import { Component, Inject, OnDestroy } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Observable, Subject } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
+import { map, shareReplay, takeUntil } from 'rxjs/operators';
+
+import { Link } from './shared/link.model';
 import { SocketService } from './shared/socket.service';
 
 @Component({
@@ -16,7 +18,7 @@ export class AppComponent implements OnDestroy {
   private readonly destroy$ = new Subject();
 
   public readonly title = 'TechNest Trial';
-  public readonly links: { text: string; link: string }[] = [
+  public readonly links: Link[] = [
     {
       text: 'Accounts',
       link: 'accounts',

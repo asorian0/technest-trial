@@ -1,0 +1,29 @@
+@import '../shared/shared';
+
+:host {
+  top: 0;
+  left: 0;
+
+  ::ng-deep {
+    tbody tr {
+      cursor: pointer;
+      animation-duration: 1s;
+
+      &.lower {
+        animation-name: lowerBalanceBackground;
+      }
+
+      &.higher {
+        animation-name: higherBalanceBackground;
+      }
+
+      &.lower,
+      &.higher {
+        td.mat-cell {
+          animation-duration: 1s;
+          animation-name: textColorBackground;
+        }
+      }
+    }
+  }
+}
