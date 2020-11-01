@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
+import { AccountService } from '../account/shared/account.service';
 import { BitcoinService } from '../bitcoin/shared/bitcoin.service';
 
 @Injectable({
@@ -12,6 +13,7 @@ export class SocketService {
   constructor(
     private readonly snackbar: MatSnackBar,
     private readonly bitcoinService: BitcoinService,
+    private readonly accountService: AccountService,
   ) {}
 
   public start(): void {
@@ -22,9 +24,12 @@ export class SocketService {
       switch (response.event) {
         case 'bitcoin':
           this.bitcoinService.currentValue$.next(response.data);
+          this.snackbar.open(`Bitcoin exchange value updated`, 'Close', {
+            duration: 2000,
+          });
           break;
         case 'updateAccount':
-          console.log(response.data);
+          this.accountService.update(response.data);
           break;
         default:
           console.log(

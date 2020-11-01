@@ -1,8 +1,11 @@
+import { DOCUMENT } from '@angular/common';
 import {
   Component,
   HostBinding,
+  Inject,
   OnDestroy,
   OnInit,
+  Renderer2,
   ViewChild,
 } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
@@ -14,6 +17,7 @@ import { Account } from 'technest-trial-shared/model/account.model';
 
 import { BitcoinService } from '../bitcoin/shared/bitcoin.service';
 
+import { AccountQuery } from './shared/account.query';
 import { AccountService } from './shared/account.service';
 
 @Component({
@@ -47,6 +51,9 @@ export class AccountComponent implements OnInit, OnDestroy {
   constructor(
     private readonly service: AccountService,
     private readonly bitcoin: BitcoinService,
+    private readonly query: AccountQuery,
+    private readonly renderer: Renderer2,
+    @Inject(DOCUMENT) private readonly document: Document,
   ) {}
 
   public ngOnInit(): void {
@@ -59,14 +66,28 @@ export class AccountComponent implements OnInit, OnDestroy {
       .list()
       .pipe(takeUntil(this.destroy$))
       .subscribe((data) => {
-        this.data = new MatTableDataSource(data);
-        this.data.sort = this.sort;
-        this.data.paginator = this.paginator;
+        this.updateTable(data);
       });
+    this.query.all$.pipe(takeUntil(this.destroy$)).subscribe((data) => {
+      this.updateTable(data);
+    });
+    this.query.active$.pipe(takeUntil(this.destroy$)).subscribe((data) => {
+      // Performs cleanup of CSS class to allow further animation executions
+      this.renderer.removeClass(
+        this.document.querySelector(`.${data.status}`),
+        data.status,
+      );
+    });
   }
 
   public ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  private updateTable(data: Account[]): void {
+    this.data = new MatTableDataSource(data);
+    this.data.sort = this.sort;
+    this.data.paginator = this.paginator;
   }
 }
