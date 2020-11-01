@@ -20,7 +20,7 @@ export class Account extends Document {
     tags: String,
     balance: String,
     availableBalance: String,
-  }
+  };
 }
 
 export const AccountSchema = SchemaFactory.createForClass(Account);

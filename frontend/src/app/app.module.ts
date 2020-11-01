@@ -10,7 +10,14 @@ import { MaterialModule } from './shared/material.module';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, MaterialModule, HttpClientModule, BitcoinModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MaterialModule,
+    HttpClientModule,
+    BitcoinModule,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

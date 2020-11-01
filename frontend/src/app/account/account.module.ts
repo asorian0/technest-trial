@@ -8,6 +8,6 @@ import { AccountComponent } from './account.component';
 
 @NgModule({
   declarations: [AccountComponent],
-  imports: [CommonModule, AccountRoutingModule, MaterialModule]
+  imports: [CommonModule, AccountRoutingModule, MaterialModule],
 })
-export class AccountModule { }
+export class AccountModule {}

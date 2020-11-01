@@ -6,7 +6,10 @@ import * as config from '../../config.json';
 import { Account } from '../account/shared/schemas/account.schema';
 
 async function seed(): Promise<void> {
-  const connection = await connect(config.database.URL, { useNewUrlParser: true, useUnifiedTopology: true });
+  const connection = await connect(config.database.URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
   const accountModel = connection.model(Account.name, Account.pojo);
   const accounts = createAccounts();
 
@@ -32,6 +35,7 @@ function createAccounts(): Account[] {
   return accounts;
 }
 
-seed().then(() => console.log(green('Seeding success')))
-  .catch(e => console.error(red(e)))
+seed()
+  .then(() => console.log(green('Seeding success')))
+  .catch((e) => console.error(red(e)))
   .finally(() => process.exit());

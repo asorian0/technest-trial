@@ -8,7 +8,9 @@ import { Account } from './schemas/account.schema';
 
 @Injectable()
 export class AccountService {
-  constructor(@InjectModel(Account.name) private readonly accountModel: Model<Account>) {}
+  constructor(
+    @InjectModel(Account.name) private readonly accountModel: Model<Account>,
+  ) {}
 
   public create(data: CreateAccountDto): Observable<Account> {
     const created = new this.accountModel(data);

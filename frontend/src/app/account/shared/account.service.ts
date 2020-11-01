@@ -5,12 +5,12 @@ import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AccountService {
   private readonly api = 'account';
 
-  constructor(private readonly http: HttpClient) { }
+  constructor(private readonly http: HttpClient) {}
 
   public list(): Observable<any> {
     return this.http.get(`${environment.apiUrl}/${this.api}`);

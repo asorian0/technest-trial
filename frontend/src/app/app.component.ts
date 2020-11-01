@@ -15,24 +15,33 @@ export class AppComponent implements OnDestroy {
   private readonly destroy$ = new Subject();
 
   public readonly title = 'TechNest Trial';
-  public readonly links: { text: string; link: string; }[] = [
+  public readonly links: { text: string; link: string }[] = [
     {
       text: 'Accounts',
       link: 'accounts',
     },
   ];
 
-  public isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
-    map(result => result.matches),
-    shareReplay()
-  );
+  public isHandset$: Observable<boolean> = this.breakpointObserver
+    .observe(Breakpoints.Handset)
+    .pipe(
+      map((result) => result.matches),
+      shareReplay(),
+    );
 
-  constructor(private readonly breakpointObserver: BreakpointObserver,
-              private readonly iconRegistry: MatIconRegistry,
-              private readonly sanitizer: DomSanitizer,
-              @Inject(DOCUMENT) private readonly document: Document) {
+  constructor(
+    private readonly breakpointObserver: BreakpointObserver,
+    private readonly iconRegistry: MatIconRegistry,
+    private readonly sanitizer: DomSanitizer,
+    @Inject(DOCUMENT) private readonly document: Document,
+  ) {
     this.document.title = this.title;
-    this.iconRegistry.addSvgIcon('btc', this.sanitizer.bypassSecurityTrustResourceUrl('assets/iconmonstr-bitcoin-3.svg'));
+    this.iconRegistry.addSvgIcon(
+      'btc',
+      this.sanitizer.bypassSecurityTrustResourceUrl(
+        'assets/iconmonstr-bitcoin-3.svg',
+      ),
+    );
   }
 
   public ngOnDestroy(): void {

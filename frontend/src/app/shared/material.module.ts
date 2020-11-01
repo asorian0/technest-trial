@@ -25,13 +25,7 @@ const modules = [
 
 @NgModule({
   declarations: [CurrencyBitcoinPipe],
-  imports: [
-    CommonModule,
-    ...modules,
-  ],
-  exports: [
-    modules,
-    CurrencyBitcoinPipe
-  ],
+  imports: [CommonModule, ...modules],
+  exports: [modules, CurrencyBitcoinPipe],
 })
-export class MaterialModule { }
+export class MaterialModule {}

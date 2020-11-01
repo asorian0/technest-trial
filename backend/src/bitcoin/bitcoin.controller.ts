@@ -9,11 +9,14 @@ import { Currency } from './shared/currency.enum';
 
 @Controller('bitcoin')
 export class BitcoinController {
-  constructor(private readonly service: BitcoinService) {
-  }
+  constructor(private readonly service: BitcoinService) {}
 
   @Get()
-  public getCurrentValue(@Param('currency') currency?: Currency): Observable<Response<number>> {
-    return this.service.getCurrentBitcoinValue(currency).pipe(map(data => ({ data })));
+  public getCurrentValue(
+    @Param('currency') currency?: Currency,
+  ): Observable<Response<number>> {
+    return this.service
+      .getCurrentBitcoinValue(currency)
+      .pipe(map((data) => ({ data })));
   }
 }

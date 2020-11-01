@@ -8,9 +8,8 @@ describe('BitcoinStatusComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BitcoinStatusComponent ]
-    })
-    .compileComponents();
+      declarations: [BitcoinStatusComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

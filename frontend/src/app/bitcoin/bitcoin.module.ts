@@ -9,4 +9,4 @@ import { BitcoinStatusComponent } from './bitcoin-status/bitcoin-status.componen
   imports: [CommonModule, MaterialModule],
   exports: [BitcoinStatusComponent],
 })
-export class BitcoinModule { }
+export class BitcoinModule {}

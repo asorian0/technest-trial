@@ -5,7 +5,7 @@ import { Observable, ReplaySubject } from 'rxjs';
 import { environment } from '../../../environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class BitcoinService {
   private readonly api = 'bitcoin';
@@ -13,7 +13,7 @@ export class BitcoinService {
   public readonly currentValue$ = new ReplaySubject<number>(1);
 
   constructor(private readonly http: HttpClient) {
-    this.currentValue().subscribe(response => {
+    this.currentValue().subscribe((response) => {
       this.currentValue$.next(response.data);
     });
   }
