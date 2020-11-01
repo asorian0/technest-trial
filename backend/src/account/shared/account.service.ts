@@ -10,7 +10,7 @@ import { Account } from './schemas/account.schema';
 
 @Injectable()
 export class AccountService {
-  public updatedAccount = new ReplaySubject<AccountModel>()
+  public updatedAccount = new ReplaySubject<AccountModel>();
 
   constructor(
     @InjectModel(Account.name) private readonly accountModel: Model<Account>,
@@ -21,20 +21,22 @@ export class AccountService {
   }
 
   public update(): Observable<Account> {
-    return this.findAll()
-      .pipe(
-        map((accounts) => {
-          const randomIndex = random.number({
-            min: 0,
-            max: accounts.length - 1,
-          });
-          const chosenAccount = accounts[randomIndex];
+    return this.findAll().pipe(
+      map((accounts) => {
+        const randomIndex = random.number({
+          min: 0,
+          max: accounts.length - 1,
+        });
+        const chosenAccount = accounts[randomIndex];
 
-          chosenAccount.balance = finance.amount();
-          chosenAccount.availableBalance = finance.amount(0, Number(chosenAccount.balance));
+        chosenAccount.balance = finance.amount();
+        chosenAccount.availableBalance = finance.amount(
+          0,
+          Number(chosenAccount.balance),
+        );
 
-          return chosenAccount;
-        })
-      );
+        return chosenAccount;
+      }),
+    );
   }
 }

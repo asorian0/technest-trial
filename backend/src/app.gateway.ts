@@ -19,8 +19,10 @@ export class AppGateway implements OnGatewayInit, OnModuleDestroy {
   private readonly maxTimeout = 40000;
   private readonly precisionTimeout = 1000;
 
-  constructor(private readonly bitcoinService: BitcoinService,
-              private readonly accountService: AccountService) {}
+  constructor(
+    private readonly bitcoinService: BitcoinService,
+    private readonly accountService: AccountService,
+  ) {}
 
   public afterInit(server: WebSocket.Server): void {
     interval(this.interval)
@@ -60,17 +62,20 @@ export class AppGateway implements OnGatewayInit, OnModuleDestroy {
     timer(updateTimeout)
       .pipe(take(1))
       .subscribe(() => {
-        this.accountService.update().subscribe(account => {
+        this.accountService.update().subscribe((account) => {
           // broadcast to make sure every instance consumes it
           server.clients.forEach((client) => {
             if (client.readyState === WebSocket.OPEN) {
               client.send(
-                JSON.stringify({ event: this.messageAccountUpdate, data: account }),
+                JSON.stringify({
+                  event: this.messageAccountUpdate,
+                  data: account,
+                }),
               );
             }
           });
           this.triggerUpdate.next();
-        })
+        });
       });
   }
 }
