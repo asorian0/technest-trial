@@ -3,5 +3,5 @@ export class CreateAccountDto {
   readonly balance: number;
   readonly availableBalance: number;
   readonly category: string;
-  readonly tag: string;
+  readonly tags: string;
 }

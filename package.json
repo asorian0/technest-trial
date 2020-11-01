@@ -4,12 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "postinstall:backend": "cd backend && npm ci",
-    "postinstall:frontend": "cd frontend && npm ci",
-    "postinstall": "npm run postinstall:backend && npm run postinstall:frontend",
+    "backend:install": "cd backend && npm ci",
+    "frontend:install": "cd frontend && npm ci",
+    "postinstall": "npm run backend:install && npm run frontend:install",
     "format": "prettier --write \"backend/src/**/*.ts\" \"backend/test/**/*.ts\" \"frontend/src/**/*.ts\" \"frontend/e2e/**/*.ts\"",
-    "lint:backend": "npm run lint --prefix backend",
-    "lint:frontend": "npm run lint --prefix frontend"
+    "backend:lint": "npm run lint --prefix backend",
+    "frontend:lint": "npm run lint --prefix frontend",
+    "backend:deploy": "npm run start --prefix backend",
+    "backend:seed": "npm run seed --prefix backend",
+    "frontend:deploy": "npm run start --prefix frontend"
   },
   "repository": {
     "type": "git",
@@ -27,7 +30,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run format && npm run lint:backend && npm run lint:frontend"
+      "pre-commit": "npm run format && npm run backend:lint && npm run frontend:lint"
     }
   }
 }

@@ -3,18 +3,24 @@ import { Document } from 'mongoose';
 
 @Schema()
 export class Account extends Document {
-  @Prop({ auto: true })
-  id: string;
   @Prop({ required: true })
   accountName: string;
   @Prop()
   category: string;
   @Prop()
-  tag: string;
+  tags: string;
   @Prop({ required: true })
   balance: string;
   @Prop({ required: true })
   availableBalance: string;
+
+  public static pojo: any = {
+    accountName: String,
+    category: String,
+    tags: String,
+    balance: String,
+    availableBalance: String,
+  }
 }
 
 export const AccountSchema = SchemaFactory.createForClass(Account);
