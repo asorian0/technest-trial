@@ -15,4 +15,11 @@ describe('BitcoinService', () => {
   it('should be defined', () => {
     expect(service).toBeDefined();
   });
+
+  it('should return observable with random numeric value', async () => {
+    const result = await service.getCurrentBitcoinValue().toPromise();
+
+    expect(result).not.toBeUndefined();
+    expect(isNaN(result)).toBeFalsy();
+  });
 });
