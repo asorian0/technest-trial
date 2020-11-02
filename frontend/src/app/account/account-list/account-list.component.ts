@@ -5,7 +5,7 @@ import { Account } from 'technest-trial-shared/model/account.model';
 
 import { BitcoinService } from '../../bitcoin/shared/bitcoin.service';
 import { CssClassCleanerService } from '../../shared/css-class-cleaner.service';
-import { AccountView } from '../shared/account-view-abstract.component';
+import { AccountViewAbstractComponent } from '../shared/account-view-abstract.component';
 import { AccountQuery } from '../shared/account.query';
 
 @Component({
@@ -14,7 +14,7 @@ import { AccountQuery } from '../shared/account.query';
   styleUrls: ['./account-list.component.scss'],
 })
 export class AccountListComponent
-  extends AccountView
+  extends AccountViewAbstractComponent
   implements AfterViewInit, OnInit {
   public data: MatTableDataSource<Account> = new MatTableDataSource([]);
   public columnsToDisplay: string[] = [

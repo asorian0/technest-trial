@@ -6,7 +6,7 @@ import { AccountTransaction } from 'technest-trial-shared/model/account-transact
 
 import { BitcoinService } from '../../bitcoin/shared/bitcoin.service';
 import { CssClassCleanerService } from '../../shared/css-class-cleaner.service';
-import { AccountView } from '../shared/account-view-abstract.component';
+import { AccountViewAbstractComponent } from '../shared/account-view-abstract.component';
 import { AccountQuery } from '../shared/account.query';
 
 @Component({
@@ -15,7 +15,7 @@ import { AccountQuery } from '../shared/account.query';
   styleUrls: ['./account-detail.component.scss'],
 })
 export class AccountDetailComponent
-  extends AccountView
+  extends AccountViewAbstractComponent
   implements AfterViewInit {
   public current$ = this.accountQuery.current$;
 
