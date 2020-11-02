@@ -1,8 +1,12 @@
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
+import { environment } from '../../environments/environment';
+
 import { AccountService } from '../account/shared/account.service';
 import { BitcoinService } from '../bitcoin/shared/bitcoin.service';
+
+import { twoSecMillis } from './shared.const';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +21,7 @@ export class SocketService {
   ) {}
 
   public start(): void {
-    this.socket = new WebSocket('ws://localhost:3000');
+    this.socket = new WebSocket(environment.wsUrl);
     this.socket.onmessage = (message) => {
       const response = JSON.parse(message.data);
 
@@ -25,7 +29,7 @@ export class SocketService {
         case 'bitcoin':
           this.bitcoinService.currentValue$.next(response.data);
           this.snackbar.open(`Bitcoin exchange value updated`, 'Close', {
-            duration: 2000,
+            duration: twoSecMillis,
           });
           break;
         case 'updateAccount':
@@ -39,11 +43,13 @@ export class SocketService {
       }
     };
     this.socket.onerror = () => {
-      this.snackbar.open(`WebSocket error`, 'Close', { duration: 2000 });
+      this.snackbar.open(`WebSocket error`, 'Close', {
+        duration: twoSecMillis,
+      });
     };
     this.socket.onclose = () => {
       this.snackbar.open(`WebSocket connection down`, 'Close', {
-        duration: 2000,
+        duration: twoSecMillis,
       });
     };
     this.socket.onopen = () => {

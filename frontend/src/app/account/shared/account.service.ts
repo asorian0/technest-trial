@@ -39,7 +39,7 @@ export class AccountService {
     this.store.setActive(account._id);
   }
 
-  private calculateAvailableBalanceChange(
+  public calculateAvailableBalanceChange(
     oldBalance: number,
     newBalance: number,
   ): AccountStatus {

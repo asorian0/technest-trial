@@ -17,7 +17,6 @@ import { BitcoinService } from '../../bitcoin/shared/bitcoin.service';
 import { CssClassCleanerService } from '../../shared/css-class-cleaner.service';
 
 import { AccountQuery } from '../shared/account.query';
-import { AccountService } from '../shared/account.service';
 
 @Component({
   selector: 'app-account-list',
@@ -48,7 +47,6 @@ export class AccountListComponent implements AfterViewInit, OnInit, OnDestroy {
   public currentBitconRate$ = this.bitcoinService.currentValue$;
 
   constructor(
-    private readonly service: AccountService,
     private readonly bitcoinService: BitcoinService,
     private readonly query: AccountQuery,
     private readonly cleaner: CssClassCleanerService,

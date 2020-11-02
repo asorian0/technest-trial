@@ -2,7 +2,7 @@ import { DOCUMENT } from '@angular/common';
 import { Inject, Injectable, Renderer2, RendererFactory2 } from '@angular/core';
 import { timer } from 'rxjs';
 
-import { oneSecMillis } from '../account/shared/shared.const';
+import { oneSecMillis } from './shared.const';
 
 @Injectable({
   providedIn: 'root',
