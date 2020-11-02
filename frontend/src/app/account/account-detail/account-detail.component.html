@@ -1,0 +1,86 @@
+<div class="position-relative w-100 h-100 d-flex flex-column">
+  <mat-card class="mb-3 d-flex flex-column justify-content-between">
+    <div class="d-flex flex-column mb-3">
+      <div class="d-flex justify-content-between">
+        <h3 class="mb-0 mr-2 font-weight-bold">{{ (current$ | async).accountName }}</h3>
+        <mat-chip-list>
+          <mat-chip color="primary" selected>Active</mat-chip>
+        </mat-chip-list>
+      </div>
+      <span class="text-capitalize">{{ (current$ | async).category }}</span>
+    </div>
+    <h2 class="main-balance mat-primary-color" [class]="status">
+      <b class="mr-2">{{ (current$ | async).balance | currencyBitcoin }}</b>
+      <span>({{ (current$ | async).balance | currencyBitcoin:true:(currentBitconRate$ | async) }})</span>
+    </h2>
+    <h3 class="mb-0">
+      <span>Available balance: {{ (current$ | async).availableBalance | currencyBitcoin }}
+        ({{ (current$ | async).balance  | currencyBitcoin:true:(currentBitconRate$ | async) }})</span>
+    </h3>
+  </mat-card>
+  <mat-card class="d-flex flex-column position-relative h-100 w-100 overflow-auto">
+    <h3 class="font-weight-bold d-flex justify-content-between">
+      <span>Statement</span>
+      <mat-checkbox color="primary" labelPosition="after" class="font-weight-normal">Show unconfirmed transactions</mat-checkbox>
+    </h3>
+    <div>
+      <mat-form-field class="mr-2">
+        <mat-label>Choose a date</mat-label>
+        <input matInput [matDatepicker]="picker" (focus)="picker.open()" />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <button mat-button>Clear selected dates</button>
+    </div>
+    <div class="flex-grow-1 overflow-auto">
+      <table mat-table matSort [dataSource]="data" class="mat-elevation-z8 w-100">
+        <ng-container matColumnDef="confirmedDate">
+          <th mat-header-cell mat-sort-header *matHeaderCellDef>Confirmed date</th>
+          <td mat-cell *matCellDef="let item">{{ item.confirmedDate | date:'short' }}</td>
+        </ng-container>
+        <ng-container matColumnDef="orderId">
+          <th mat-header-cell mat-sort-header *matHeaderCellDef>Order ID</th>
+          <td mat-cell *matCellDef="let item">{{ item.orderId }}</td>
+        </ng-container>
+        <ng-container matColumnDef="orderCode">
+          <th mat-header-cell *matHeaderCellDef>Order code</th>
+          <td mat-cell *matCellDef="let item">{{ item.orderCode }}</td>
+        </ng-container>
+        <ng-container matColumnDef="transactionType">
+          <th mat-header-cell *matHeaderCellDef>Transaction type</th>
+          <td mat-cell *matCellDef="let item">{{ item.transactionType }}</td>
+        </ng-container>
+        <ng-container matColumnDef="debit">
+          <th mat-header-cell *matHeaderCellDef>Debit</th>
+          <td mat-cell *matCellDef="let item">
+            <div class="d-flex flex-column" *ngIf="item.debit">
+              <span class="mb-1">{{ item.debit | currencyBitcoin }}</span>
+              <span>{{ item.debit | currencyBitcoin:true:(currentBitconRate$ | async) }}</span>
+            </div>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="credit">
+          <th mat-header-cell *matHeaderCellDef>Credit</th>
+          <td mat-cell *matCellDef="let item">
+            <div class="d-flex flex-column" *ngIf="item.credit">
+              <span class="mb-1">{{ item.credit | currencyBitcoin }}</span>
+              <span>{{ item.credit | currencyBitcoin:true:(currentBitconRate$ | async) }}</span>
+            </div>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="balance">
+          <th mat-header-cell *matHeaderCellDef>Balance</th>
+          <td mat-cell *matCellDef="let item">
+            <div class="d-flex flex-column">
+              <span class="mb-1">{{ item.balance | currencyBitcoin }}</span>
+              <span>{{ item.balance | currencyBitcoin:true:(currentBitconRate$ | async) }}</span>
+            </div>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columnsToDisplay, sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: columnsToDisplay;" [class]="row.status" [routerLink]="row._id"></tr>
+      </table>
+    </div>
+    <mat-paginator [pageSizeOptions]="pageSizeOptions" showFirstLastButtons class="border-top"></mat-paginator>
+  </mat-card>
+</div>

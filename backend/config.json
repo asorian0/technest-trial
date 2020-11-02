@@ -1,0 +1,11 @@
+{
+  "database": {
+    "URL": "mongodb://localhost:27017/technest"
+  },
+  "seed": {
+    "count": 25
+  },
+  "bitcoin": {
+    "API": "https://blockchain.info"
+  }
+}

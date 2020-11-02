@@ -1,0 +1,39 @@
+<mat-card class="d-flex flex-column position-relative h-100 w-100">
+  <div class="flex-grow-1 overflow-auto">
+    <table mat-table matSort [dataSource]="data" class="mat-elevation-z8 w-100">
+      <ng-container matColumnDef="accountName">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef>Account name</th>
+        <td mat-cell *matCellDef="let item">{{ item.accountName }}</td>
+      </ng-container>
+      <ng-container matColumnDef="category">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef>Category</th>
+        <td mat-cell *matCellDef="let item">{{ item.category }}</td>
+      </ng-container>
+      <ng-container matColumnDef="tags">
+        <th mat-header-cell *matHeaderCellDef>Tags</th>
+        <td mat-cell *matCellDef="let item">{{ item.tags }}</td>
+      </ng-container>
+      <ng-container matColumnDef="balance">
+        <th mat-header-cell *matHeaderCellDef>Balance</th>
+        <td mat-cell *matCellDef="let item">
+          <div class="d-flex flex-column">
+            <span class="mb-1">{{ item.balance | currencyBitcoin }}</span>
+            <span>{{ item.balance | currencyBitcoin:true:(currentBitconRate$ | async) }}</span>
+          </div>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="availableBalance">
+        <th mat-header-cell *matHeaderCellDef>Available balance</th>
+        <td mat-cell *matCellDef="let item">
+          <div class="d-flex flex-column">
+            <span class="mb-1">{{ item.availableBalance | currencyBitcoin }}</span>
+            <span>{{ item.availableBalance | currencyBitcoin:true:(currentBitconRate$ | async) }}</span>
+          </div>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="columnsToDisplay, sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: columnsToDisplay;" [class]="row.status" [routerLink]="row._id"></tr>
+    </table>
+  </div>
+  <mat-paginator [pageSizeOptions]="pageSizeOptions" showFirstLastButtons class="border-top"></mat-paginator>
+</mat-card>

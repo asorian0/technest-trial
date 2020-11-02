@@ -1,0 +1,7 @@
+.idea
+.vscode
+node_modules
+dist
+TODO
+shared/**/*.d.ts
+shared/**/*.js

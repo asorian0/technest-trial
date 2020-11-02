@@ -1,0 +1,13 @@
+<div class="page-toolbar d-flex flex-column align-items-start justify-content-start p-3 border-bottom">
+  <h2 class="mb-0">Accounts</h2>
+  <div>
+    <span class="mr-2">Home</span>
+    <span class="mr-2">/</span>
+    <span [class.font-weight-bold]="(current$ | async) == null"
+          [class.mr-2]="(current$ | async) != null">Accounts</span>
+    <ng-container *ngIf="(current$ | async) != null">
+      <span class="mr-2">/</span>
+      <span class="font-weight-bold">Details</span>
+    </ng-container>
+  </div>
+</div>

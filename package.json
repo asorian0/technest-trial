@@ -1,0 +1,38 @@
+{
+  "name": "technest-trial",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "shared:install": "cd shared && npm ci",
+    "backend:install": "cd backend && npm ci",
+    "frontend:install": "cd frontend && npm ci",
+    "preinstall": "npm run shared:install",
+    "postinstall": "npm run backend:install && npm run frontend:install",
+    "format": "prettier --write \"backend/src/**/*.ts\" \"backend/test/**/*.ts\" \"frontend/src/**/*.ts\" \"frontend/e2e/**/*.ts\"",
+    "backend:lint": "npm run lint --prefix backend",
+    "frontend:lint": "npm run lint --prefix frontend",
+    "backend:deploy": "npm run start --prefix backend",
+    "backend:seed": "npm run seed --prefix backend",
+    "frontend:deploy": "npm run start --prefix frontend"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/asorian0/technest-trial.git"
+  },
+  "author": "Armando Soriano <asoriano.dev@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/asorian0/technest-trial/issues"
+  },
+  "homepage": "https://github.com/asorian0/technest-trial#readme",
+  "devDependencies": {
+    "husky": "^4.3.0",
+    "prettier": "^2.1.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run format && git add . && npm run backend:lint && npm run frontend:lint"
+    }
+  }
+}

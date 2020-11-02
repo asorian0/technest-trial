@@ -1,0 +1,36 @@
+@import '~@angular/material/theming';
+@import 'theme';
+
+@include angular-material-theme($defaultTheme);
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+button {
+  outline: 0 !important;
+}
+
+td.mat-cell {
+  padding-top: 1rem !important;
+  padding-bottom: 1rem !important;
+}
+
+.mat-primary-color {
+  color: mat-color($primaryPalette);
+}
+.mat-primary-background {
+  background-color: mat-color($primaryPalette);
+}
+.mat-accent-color {
+  color: mat-color($accentPalette);
+}
+.mat-accent-background {
+  background-color: mat-color($accentPalette);
+}
+
+.mat-sort-header-sorted {
+  &,
+  .mat-sort-header-arrow {
+    color: mat-color($primaryPalette);
+  }
+}
