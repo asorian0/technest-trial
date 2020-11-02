@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { takeUntil, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { AccountStatus } from 'technest-trial-shared/enum/account-status.enum';
 import { Account } from 'technest-trial-shared/model/account.model';
 
@@ -28,7 +28,7 @@ export class AccountService {
       .pipe(tap((data) => this.store.set(data)));
   }
 
-  public update(account: Account): any {
+  public update(account: Account): void {
     this.store.upsert(account._id, (old) => ({
       ...account,
       status: this.calculateAvailableBalanceChange(

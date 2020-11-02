@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, ReplaySubject } from 'rxjs';
+import { Response } from 'technest-trial-shared/model/response.model';
 
 import { environment } from '../../../environments/environment';
 
@@ -18,7 +19,7 @@ export class BitcoinService {
     });
   }
 
-  public currentValue(): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/${this.api}`);
+  public currentValue(): Observable<Response<number>> {
+    return this.http.get<Response<number>>(`${environment.apiUrl}/${this.api}`);
   }
 }
