@@ -57,8 +57,6 @@ export class AppGateway implements OnGatewayInit, OnModuleDestroy {
       precision: this.precisionTimeout,
     });
 
-    console.log('feedUpdates in ', updateTimeout);
-
     timer(updateTimeout)
       .pipe(take(1))
       .subscribe(() => {
