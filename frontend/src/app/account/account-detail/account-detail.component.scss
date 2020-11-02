@@ -1,0 +1,14 @@
+@import '../shared/shared';
+
+.main-balance {
+  font-size: 40px;
+  animation-duration: 1s;
+
+  &.lower {
+    animation-name: lowerBalanceText;
+  }
+
+  &.higher {
+    animation-name: higherBalanceText;
+  }
+}

@@ -18,7 +18,9 @@ export class AccountService {
   constructor(
     private readonly http: HttpClient,
     private readonly store: AccountStore,
-  ) {}
+  ) {
+    this.list().subscribe();
+  }
 
   public list(): Observable<Account[]> {
     return this.http
@@ -26,7 +28,7 @@ export class AccountService {
       .pipe(tap((data) => this.store.set(data)));
   }
 
-  public update(account: Account): any {
+  public update(account: Account): void {
     this.store.upsert(account._id, (old) => ({
       ...account,
       status: this.calculateAvailableBalanceChange(
@@ -37,7 +39,7 @@ export class AccountService {
     this.store.setActive(account._id);
   }
 
-  private calculateAvailableBalanceChange(
+  public calculateAvailableBalanceChange(
     oldBalance: number,
     newBalance: number,
   ): AccountStatus {

@@ -7,7 +7,7 @@
     "shared:install": "cd shared && npm ci",
     "backend:install": "cd backend && npm ci",
     "frontend:install": "cd frontend && npm ci",
-    "preinstall": "npm run shared:install && npm run build --prefix shared",
+    "preinstall": "npm run shared:install",
     "postinstall": "npm run backend:install && npm run frontend:install",
     "format": "prettier --write \"backend/src/**/*.ts\" \"backend/test/**/*.ts\" \"frontend/src/**/*.ts\" \"frontend/e2e/**/*.ts\"",
     "backend:lint": "npm run lint --prefix backend",
@@ -32,7 +32,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run format && npm run backend:lint && npm run frontend:lint"
+      "pre-commit": "npm run format && git add . && npm run backend:lint && npm run frontend:lint"
     }
   }
 }
